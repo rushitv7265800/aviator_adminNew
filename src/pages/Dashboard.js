@@ -70,7 +70,7 @@ const Dashboard = (props) => {
                       </h2>
                     </div>
                     <h4 class="text-muted font-weight-normal mb-0 w-100 text-truncate">
-                      User
+                      Total User
                     </h4>
                   </div>
                   <div class="ml-auto mt-md-3 mt-lg-0">
@@ -78,33 +78,6 @@ const Dashboard = (props) => {
                       <i
                         data-feather="user-plus"
                         class="fas fa-user-plus fa-lg text-warning"
-                      ></i>
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </NavLink>
-          </div>
-
-          <div class="card border-right mr-3">
-            <NavLink to="/admin/country">
-              <div class="card-body">
-                <div class="d-flex d-lg-flex d-md-block align-items-center">
-                  <div>
-                    <div class="d-inline-flex align-items-center">
-                      <h2 class="text-dark mb-1 font-weight-medium">
-                        {data.country}
-                      </h2>
-                    </div>
-                    <h4 class="text-muted font-weight-normal mb-0 w-100 text-truncate">
-                      Country
-                    </h4>
-                  </div>
-                  <div class="ml-auto mt-md-3 mt-lg-0">
-                    <span class="opacity-7 text-muted">
-                      <i
-                        data-feather="user-plus"
-                        class="fas fa-globe fa-lg text-primary"
                       ></i>
                     </span>
                   </div>
@@ -123,7 +96,7 @@ const Dashboard = (props) => {
                       </h2>
                     </div>
                     <h4 class="text-muted font-weight-normal mb-0 w-100 text-truncate">
-                      Purchase Plan
+                      Total Recharge
                     </h4>
                   </div>
                   <div class="ml-auto mt-md-3 mt-lg-0">
@@ -149,7 +122,7 @@ const Dashboard = (props) => {
                       </h2>
                     </div>
                     <h4 class="text-muted font-weight-normal mb-0 w-100 text-truncate">
-                      VIP Plan
+                      Total Withdrawal
                     </h4>
                   </div>
                   <div class="ml-auto mt-md-3 mt-lg-0">
@@ -165,219 +138,6 @@ const Dashboard = (props) => {
             </NavLink>
           </div>
         </div>
-        <div class="card-group">
-          <div class="card border-right mr-3">
-            <NavLink to="/admin/category">
-              <div class="card-body">
-                <div class="d-flex d-lg-flex d-md-block align-items-center">
-                  <div>
-                    <div class="d-inline-flex align-items-center">
-                      <h2 class="text-dark mb-1 font-weight-medium">
-                        {data.category}
-                      </h2>
-                    </div>
-                    <h4 class="text-muted font-weight-normal mb-0 w-100 text-truncate">
-                      Category
-                    </h4>
-                  </div>
-                  <div class="ml-auto mt-md-3 mt-lg-0">
-                    <span class="opacity-7 text-muted">
-                      <i
-                        data-feather="user-plus"
-                        class="fab fa-cuttlefish fa-lg text-danger"
-                      ></i>
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </NavLink>
-          </div>
-          <div class="card border-right mr-3">
-            <NavLink to="/admin/gift">
-              <div class="card-body">
-                <div class="d-flex d-lg-flex d-md-block align-items-center">
-                  <div>
-                    <div class="d-inline-flex align-items-center">
-                      <h2 class="text-dark mb-1 font-weight-medium">
-                        {data.gift}
-                      </h2>
-                    </div>
-                    <h4 class="text-muted font-weight-normal mb-0 w-100 text-truncate">
-                      Gift
-                    </h4>
-                  </div>
-                  <div class="ml-auto mt-md-3 mt-lg-0">
-                    <span class="opacity-7 text-muted">
-                      <i
-                        data-feather="user-plus"
-                        class="fas fa-gift fa-lg text-success"
-                      ></i>
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </NavLink>
-          </div>
-          <div class="card border-right mr-3">
-            <NavLink to="/admin/emoji">
-              <div class="card-body">
-                <div class="d-flex d-lg-flex d-md-block align-items-center">
-                  <div>
-                    <div class="d-inline-flex align-items-center">
-                      <h2 class="text-dark mb-1 font-weight-medium">
-                        {data.emoji}
-                      </h2>
-                    </div>
-                    <h4 class="text-muted font-weight-normal mb-0 w-100 text-truncate">
-                      Emoji
-                    </h4>
-                  </div>
-                  <div class="ml-auto mt-md-3 mt-lg-0">
-                    <span class="opacity-7 text-muted">
-                      <i
-                        data-feather="user-plus"
-                        class="fas fa-smile fa-lg text-primary"
-                      ></i>
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </NavLink>
-          </div>
-          <div class="card border-right mr-3">
-            <NavLink to="/admin/sticker">
-              <div class="card-body">
-                <div class="d-flex d-lg-flex d-md-block align-items-center">
-                  <div>
-                    <div class="d-inline-flex align-items-center">
-                      <h2 class="text-dark mb-1 font-weight-medium">
-                        {data.sticker}
-                      </h2>
-                    </div>
-                    <h4 class="text-muted font-weight-normal mb-0 w-100 text-truncate">
-                      Sticker
-                    </h4>
-                  </div>
-                  <div class="ml-auto mt-md-3 mt-lg-0">
-                    <span class="opacity-7 text-muted">
-                      <i
-                        data-feather="user-plus"
-                        class="fas fa-magic fa-lg text-warning"
-                      ></i>
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </NavLink>
-          </div>
-        </div>
-        <div class="card-group">
-          <div class="card border-right mr-3">
-            <NavLink to="/admin/host/agency">
-              <div class="card-body">
-                <div class="d-flex d-lg-flex d-md-block align-items-center">
-                  <div>
-                    <div class="d-inline-flex align-items-center">
-                      <h2 class="text-dark mb-1 font-weight-medium">
-                        {data.onlineHost}
-                      </h2>
-                    </div>
-                    <h4 class="text-muted font-weight-normal mb-0 w-100 text-truncate">
-                      Online Host
-                    </h4>
-                  </div>
-                  <div class="ml-auto mt-md-3 mt-lg-0">
-                    <span class="opacity-7 text-muted">
-                      <i
-                        data-feather="user-plus"
-                        class="fas fa-user fa-lg text-orange"
-                      ></i>
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </NavLink>
-          </div>
-          <div class="card border-right mr-3">
-            <NavLink to="/admin/host/agency">
-              <div class="card-body">
-                <div class="d-flex d-lg-flex d-md-block align-items-center">
-                  <div>
-                    <div class="d-inline-flex align-items-center">
-                      <h2 class="text-dark mb-1 font-weight-medium">
-                        {data.liveHost}
-                      </h2>
-                    </div>
-                    <h4 class="text-muted font-weight-normal mb-0 w-100 text-truncate">
-                      Live Host
-                    </h4>
-                  </div>
-                  <div class="ml-auto mt-md-3 mt-lg-0">
-                    <span class="opacity-7 text-muted">
-                      <i
-                        data-feather="user-plus"
-                        class="fas fa-user fa-lg text-info"
-                      ></i>
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </NavLink>
-          </div>
-          <div class="card border-right mr-3">
-            <NavLink to="/admin/host/agency">
-              <div class="card-body">
-                <div class="d-flex d-lg-flex d-md-block align-items-center">
-                  <div>
-                    <div class="d-inline-flex align-items-center">
-                      <h2 class="text-dark mb-1 font-weight-medium">
-                        {data.host}
-                      </h2>
-                    </div>
-                    <h4 class="text-muted font-weight-normal mb-0 w-100 text-truncate">
-                      Total Host
-                    </h4>
-                  </div>
-                  <div class="ml-auto mt-md-3 mt-lg-0">
-                    <span class="opacity-7 text-muted">
-                      <i
-                        data-feather="user-plus"
-                        class="fas fa-users fa-lg text-success"
-                      ></i>
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </NavLink>
-          </div>
-          <div class="card border-right mr-3">
-            <NavLink to="/admin/agency">
-              <div class="card-body">
-                <div class="d-flex d-lg-flex d-md-block align-items-center">
-                  <div>
-                    <div class="d-inline-flex align-items-center">
-                      <h2 class="text-dark mb-1 font-weight-medium">
-                        {data.agency}
-                      </h2>
-                    </div>
-                    <h4 class="text-muted font-weight-normal mb-0 w-100 text-truncate">
-                      Total Agency
-                    </h4>
-                  </div>
-                  <div class="ml-auto mt-md-3 mt-lg-0">
-                    <span class="opacity-7 text-muted">
-                      <i
-                        data-feather="user-plus"
-                        class="fas fa-child fa-lg text-danger"
-                      ></i>
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </NavLink>
-          </div>
-        </div>
-
         {/* <div class="row">
           <div class="col-lg-12 col-md-12">
             <div class="card">

@@ -28,7 +28,7 @@ import "../../assets/libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js
 import LogoText from "../../assets/images/logo-text.png";
 import Profile from "../../assets/images/users/profile-pic.jpg";
 
-import Logo from "../../images/logo.png";
+import Logo from "../../assets/logo.png";
 
 //MUI
 import {
@@ -240,7 +240,7 @@ const Navbar = (props) => {
           <div class="navbar-header" data-logobg="skin6">
             <a
               class="nav-toggler waves-effect waves-light d-block d-md-none"
-                  href="javascript:void(0)"
+              href="javascript:void(0)"
             >
               <i class="ti-menu ti-close"></i>
             </a>
@@ -266,7 +266,7 @@ const Navbar = (props) => {
                 <span class="logo-text">
                   {/* <img src={LogoText} alt="homepage" class="dark-logo" /> */}
                   <h1 class="mt-3 ml-2 align-items-center">
-                    Wa<b>we</b>
+                    Aviator
                   </h1>
                   {/* <img src={LogoText} class="light-logo" alt="homepage" /> */}
                 </span>
@@ -275,7 +275,7 @@ const Navbar = (props) => {
 
             <a
               class="topbartoggler d-block d-md-none waves-effect waves-light"
-                  href="javascript:void(0)"
+              href="javascript:void(0)"
               data-toggle="collapse"
               data-target="#navbarSupportedContent"
               aria-controls="navbarSupportedContent"
@@ -291,7 +291,7 @@ const Navbar = (props) => {
               <li class="nav-item dropdown">
                 <a
                   class="nav-link dropdown-toggle pl-md-3 position-relative"
-                      href="javascript:void(0)"
+                  href="javascript:void(0)"
                   onClick={handleClickOpen}
                 >
                   <span>
@@ -527,6 +527,7 @@ const Navbar = (props) => {
         >
           <nav class="sidebar-nav">
             <ul id="sidebarnav">
+
               <li class="sidebar-item mb-1" onClick={handleDrawer}>
                 <NavLink
                   to="/admin/dashboard"
@@ -540,11 +541,19 @@ const Navbar = (props) => {
                   <span class="hide-menu">Dashboard</span>
                 </NavLink>
               </li>
-
+             <li class="sidebar-item mt-4 mb-2" onClick={handleDrawer}>
+                <NavLink to="/admin/user" className={classes.navLink}>
+                  <i
+                    data-feather="home"
+                    class="fas fa-users feather-icon pl-5 mr-3"
+                  ></i>
+                  <span class="hide-menu">User</span>
+                </NavLink>
+              </li>
               <li class="sidebar-item mt-0 ml-3 mb-0 mt-3">
                 <a
                   class="sidebar-link has-arrow"
-                      href="javascript:void(0)"
+                  href="javascript:void(0)"
                   aria-expanded="false"
                   id="arrow"
                 >
@@ -600,7 +609,7 @@ const Navbar = (props) => {
               <li class="sidebar-item mt-0 ml-3 mb-0 mt-2">
                 <a
                   class="sidebar-link has-arrow"
-                      href="javascript:void(0)"
+                  href="javascript:void(0)"
                   aria-expanded="false"
                   id="arrow"
                 >
@@ -633,7 +642,7 @@ const Navbar = (props) => {
                       to="/admin/fakeHost"
                       className={classes.navLink}
                     >
-                       <i
+                      <i
                         data-feather="home"
                         class="fas fa-child feather-icon pl-2 mr-2"
                       />
@@ -652,10 +661,10 @@ const Navbar = (props) => {
                       <span class="hide-menu">Accepted Redeem</span>
                     </NavLink>
                   </li>
-                 
-                  
+
+
                   <li class="sidebar-item mt-3" onClick={handleDrawer}>
-                    <NavLink to="/admin/redeem" className={classes.navLink}>         
+                    <NavLink to="/admin/redeem" className={classes.navLink}>
                       <i
                         data-feather="home"
                         class="fas fa-registered feather-icon pl-2 mr-2"
@@ -694,7 +703,7 @@ const Navbar = (props) => {
               <li class="sidebar-item ml-3 mb-0">
                 <a
                   class="sidebar-link has-arrow"
-                      href="javascript:void(0)"
+                  href="javascript:void(0)"
                   aria-expanded="false"
                   id="arrow"
                 >
@@ -719,12 +728,12 @@ const Navbar = (props) => {
                     </NavLink>
                   </li>
                   <li class="sidebar-item mt-3" onClick={handleDrawer}>
-                    <NavLink to="/admin/recharge" className={classes.navLink}>
-                      <i
+                    <NavLink to="/admin/fakeUser" className={classes.navLink}>
+                    <i
                         data-feather="home"
-                        class="far fa-registered feather-icon pl-2 mr-2"
+                        class="fas fa-users feather-icon pl-2 mr-2"
                       ></i>
-                      <span class="hide-menu">Offline Recharge</span>
+                      <span class="hide-menu">Fake User Detail</span>
                     </NavLink>
                   </li>
                   <li class="sidebar-item mt-3" onClick={handleDrawer}>
@@ -754,7 +763,7 @@ const Navbar = (props) => {
                 </ul>
               </li>
 
-             
+
               <li class="sidebar-item mt-2" onClick={handleDrawer}>
                 <NavLink to="/admin/request" className={classes.navLink}>
                   {/* <a class="sidebar-link sidebar-link" aria-expanded="false"> */}
@@ -770,7 +779,7 @@ const Navbar = (props) => {
               <li class="sidebar-item mt-2 ml-3 mb-0">
                 <a
                   class="sidebar-link has-arrow"
-                      href="javascript:void(0)"
+                  href="javascript:void(0)"
                   aria-expanded="false"
                   id="arrow"
                 >
@@ -809,15 +818,15 @@ const Navbar = (props) => {
                 <NavLink to="/admin/country" className={classes.navLink}>
                   <i
                     data-feather="home"
-                    class="fas fa-globe feather-icon pl-5 mr-3"
+                    class="fas fa-users feather-icon pl-5 mr-3"
                   ></i>
-                  <span class="hide-menu">Country</span>
+                  <span class="hide-menu">User</span>
                 </NavLink>
               </li>
               <li class="sidebar-item mt-2 ml-3 mb-0">
                 <a
                   class="sidebar-link has-arrow"
-                      href="javascript:void(0)"
+                  href="javascript:void(0)"
                   aria-expanded="false"
                   id="arrow"
                 >
@@ -855,7 +864,7 @@ const Navbar = (props) => {
               <li class="sidebar-item mt-0 ml-3 mb-0">
                 <a
                   class="sidebar-link has-arrow"
-                      href="javascript:void(0)"
+                  href="javascript:void(0)"
                   aria-expanded="false"
                 >
                   <i
@@ -892,7 +901,7 @@ const Navbar = (props) => {
               <li class="sidebar-item mt-0 ml-3 mb-0">
                 <a
                   class="sidebar-link has-arrow"
-                      href="javascript:void(0)"
+                  href="javascript:void(0)"
                   aria-expanded="false"
                 >
                   <i

@@ -10644,6 +10644,22 @@ Preloader
   display: inline-block;
   line-height: 13px;
 }
+.rule{
+
+}
+.rule h5{
+  font-size: 20px;
+  color: #7b72ea;
+}
+.rule h6{
+  font-size: 15px;
+    font-weight: 500;
+}
+.rule span{
+  font-weight: 600;
+  color:#01b9f1;  
+  margin-right: 10px;
+}
 .topbar .customize-input .form-control-icon {
   position: absolute;
   top: 30px;

@@ -17,7 +17,7 @@ import { getPurchaseCoinHistory } from "../store/purchaseCoinHistory/action";
 import { getReportedUser } from "../store/reportUser/action";
 
 //components
-import AgencyTable from "../Components/Table/AgencyTable";
+import AgencyTable from "../Components/Table/PlanCrash";
 import UserTable from "../Components/Table/UserTable";
 import CountryTable from "../Components/Table/CountryTable";
 import CategoryTable from "../Components/Table/CategoryTable";
@@ -57,6 +57,7 @@ import BannerTable from "../Components/Table/BannerTable";
 import OfflineRecharge from "./OfflineRecharge"
 import FakeHosttable from "../Components/Table/FakeHosttable"
 import Spinner from "../Components/Spinner";
+import FakeUser from "../Components/Table/FakeUser";
 
 
 const Admin = (props) => {
@@ -273,6 +274,11 @@ const Admin = (props) => {
               path={`${location.path}/fakeHost`}
               exact
               component={FakeHosttable}
+            />
+                <Route
+              path={`${location.path}/fakeUser`}
+              exact
+              component={FakeUser}
             />
           </Switch>
           {/* <Spinner /> */}

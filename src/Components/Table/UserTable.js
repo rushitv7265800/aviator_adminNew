@@ -132,26 +132,6 @@ const UserTable = (props) => {
           </span>
         </Alert>
       </Snackbar>
-      <div class="page-breadcrumb">
-        <div class="row">
-          <div class="col-7 align-self-center">
-            <div class="d-flex align-items-center">
-              <nav aria-label="breadcrumb">
-                <ol class="breadcrumb m-0 p-0">
-                  <li class="breadcrumb-item"></li>
-                  <li
-                    class="breadcrumb-item text-muted active"
-                    aria-current="page"
-                  >
-                    User
-                  </li>
-                </ol>
-              </nav>
-            </div>
-          </div>
-        </div>
-      </div>
-
       <div class="container-fluid">
         <div class="row">
           <div class="col-12">
@@ -159,7 +139,7 @@ const UserTable = (props) => {
               <div class="card-body">
                 <div class="row">
                   <div class="col-xs-12 col-sm-12 col-md-6 col-lg-8 mt-4 float-left">
-                    <h3 class="card-title">User</h3>
+                    <h3 class="card-title">User List</h3>
                   </div>
                   <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 mt-3 float-right">
                     <form action="">
@@ -197,16 +177,18 @@ const UserTable = (props) => {
                   >
                     <thead>
                       <tr>
-                        <th>Name</th>
-                        <th>Status</th>
+                        <th>No.</th>
                         <th>User Id</th>
-                        <th>Coin</th>
-                        <th>Followers</th>
-                        <th>Following</th>
+                        <th>Name</th>
+                        <th>Mobile</th>
+                        <th>Email</th>
+                        <th>Wallet</th>
+                        <th>Last Recharge</th>
+                        <th>Status</th>
                         <th>Country</th>
                         <th>IP Address</th>
                         <th>Last Login</th>
-                        <th>Arrived On</th>
+                        <th>CreatedAt</th>
                         <th>Is Block</th>
                         <th>Action</th>
                       </tr>
@@ -216,13 +198,19 @@ const UserTable = (props) => {
                         <Fragment>
                           {(rowsPerPage > 0
                             ? data.slice(
-                                page * rowsPerPage,
-                                page * rowsPerPage + rowsPerPage
-                              )
+                              page * rowsPerPage,
+                              page * rowsPerPage + rowsPerPage
+                            )
                             : data
                           ).map((data, index) => {
                             return (
                               <tr key={index}>
+                                <td style={{ verticalAlign: "middle" }}>
+                                  {(page * rowsPerPage) + (index + 1)}
+                                </td>
+                                <td style={{ verticalAlign: "middle" }}>
+                                  {data.uniqueId}
+                                </td>
                                 <td>
                                   {
                                     <img
@@ -246,6 +234,24 @@ const UserTable = (props) => {
                                   {data.name}
                                 </td>
                                 <td style={{ verticalAlign: "middle" }}>
+                                  {data?.mobile ? data?.mobile :"1234567890"}
+                                </td>
+                                <td style={{ verticalAlign: "middle" }}>
+                                  {data?.name+"@gmail.com"}
+                                </td>
+                                <td style={{ verticalAlign: "middle" }}>
+                                  {"$20"}
+                                </td>
+                                <td style={{ verticalAlign: "middle" }}>
+                                  <EdiText
+                                    type="text"
+                                    value={isCoin ? newCoin : data.coin}
+                                    onSave={(val) =>
+                                      handleUpdateCoin(val, data._id, data.coin)
+                                    }
+                                  />
+                                </td>
+                                <td style={{ verticalAlign: "middle" }}>
                                   {data.isOnline ? (
                                     <span className="text-success font-weight-bold">
                                       Online
@@ -255,25 +261,6 @@ const UserTable = (props) => {
                                       Offline
                                     </span>
                                   )}
-                                </td>
-                                <td style={{ verticalAlign: "middle" }}>
-                                  {data.uniqueId}
-                                </td>
-                                <td style={{ verticalAlign: "middle" }}>
-                                  {data.coin}
-                                  {/* <EdiText
-                                    type="text"
-                                    value={isCoin ? newCoin : data.coin}
-                                    onSave={(val) =>
-                                      handleUpdateCoin(val, data._id, data.coin)
-                                    }
-                                  /> */}
-                                </td>
-                                <td style={{ verticalAlign: "middle" }}>
-                                  {data.followers_count}
-                                </td>
-                                <td style={{ verticalAlign: "middle" }}>
-                                  {data.following_count}
                                 </td>
                                 <td style={{ verticalAlign: "middle" }}>
                                   {data.country}
@@ -300,9 +287,8 @@ const UserTable = (props) => {
                                       <p
                                         style={{
                                           fontSize: 12,
-                                          marginLeft: `${
-                                            data.block ? "5px" : "33px"
-                                          }`,
+                                          marginLeft: `${data.block ? "5px" : "33px"
+                                            }`,
                                           color: "white",
                                           marginTop: "6px",
                                         }}
@@ -336,22 +322,6 @@ const UserTable = (props) => {
                         </tr>
                       )}
                     </tbody>
-                    <tfoot>
-                      <tr>
-                        <th>Name</th>
-                        <th>Status</th>
-                        <th>User Id</th>
-                        <th>Coin</th>
-                        <th>Followers</th>
-                        <th>Following</th>
-                        <th>Country</th>
-                        <th>IP Address</th>
-                        <th>Last Login</th>
-                        <th>Arrived On</th>
-                        <th>Is Block</th>
-                        <th>Action</th>
-                      </tr>
-                    </tfoot>
                   </table>
                 </div>
                 <div class="py-2">

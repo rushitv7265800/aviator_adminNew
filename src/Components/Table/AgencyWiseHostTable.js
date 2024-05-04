@@ -69,25 +69,6 @@ const HostTable = (props) => {
 
   return (
     <>
-      <div class="page-breadcrumb">
-        <div class="row">
-          <div class="col-7 align-self-center">
-            <div class="d-flex align-items-center">
-              <nav aria-label="breadcrumb">
-                <ol class="breadcrumb m-0 p-0">
-                  <li class="breadcrumb-item"></li>
-                  <li
-                    class="breadcrumb-item text-muted active"
-                    aria-current="page"
-                  >
-                    Agency wise Host
-                  </li>
-                </ol>
-              </nav>
-            </div>
-          </div>
-        </div>
-      </div>
 
       <div class="container-fluid">
         <div class="row">
@@ -96,7 +77,7 @@ const HostTable = (props) => {
               <div class="card-body">
                 <div class="row">
                   <div class="col-xs-12 col-sm-12 col-md-6 col-lg-8 mt-4 float-left">
-                    <h3 class="card-title">Agency wise Host</h3>
+                    <h3 class="card-title">Recharge History</h3>
                   </div>
                   <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 mt-3 float-right">
                     <form action="">
@@ -131,10 +112,12 @@ const HostTable = (props) => {
                   >
                     <thead>
                       <tr>
-                        <th>Agency Name</th>
-                        <th>Total Host</th>
-                        <th>Total Earning Coin</th>
-                        <th>Total Pay Rupee</th>
+                        <th>No.</th>
+                        <th>User Id</th>
+                        <th>User Name</th>
+                        <th>Transaction Id</th>
+                        <th>Amount</th>
+                        <th>Status</th>
                         <th>Created At</th>
                         <th>Action</th>
                       </tr>
@@ -144,20 +127,31 @@ const HostTable = (props) => {
                         <>
                           {(rowsPerPage > 0
                             ? data.slice(
-                                page * rowsPerPage,
-                                page * rowsPerPage + rowsPerPage
-                              )
+                              page * rowsPerPage,
+                              page * rowsPerPage + rowsPerPage
+                            )
                             : data
                           ).map((data, index) => {
                             return (
                               <tr key={index}>
+                                <td style={{ verticalAlign: "middle" }}>
+                                  {(page * rowsPerPage) + (index + 1)}
+                                </td>
+                                <td> {data._id} </td>
                                 <td> {data.name} </td>
-                                <td> {data.count} </td>
                                 <td> {data.earningCoin} </td>
                                 <td>
                                   {" "}
                                   {data.earningCoin / setting?.howManyCoins}
                                   &nbsp; {setting?.currency}{" "}
+                                </td>
+                                <td>
+                                  {
+                                    data?.count === 0 ?
+                                      <div style={{ backgroundColor: "green", color: "white", padding: "6px 13px", textAlign: "center", borderRadius: "16px", fontSize: "13px" }}>Approved</div>
+                                      :
+                                      <div style={{ backgroundColor: "yellow", color: "white", padding: "6px 13px", textAlign: "center", borderRadius: "16px", fontSize: "13px" }}>Pending</div>
+                                  }
                                 </td>
                                 <td>
                                   {" "}
@@ -166,14 +160,34 @@ const HostTable = (props) => {
                                   )}{" "}
                                 </td>
                                 <td>
-                                  <button
-                                    type="button"
-                                    class="btn btn-fill btn-primary btn-sm"
-                                    style={{ borderRadius: 5 }}
-                                    onClick={() => showHost(data._id)}
-                                  >
-                                    Host Detail
-                                  </button>
+                                  {
+                                    data?.count === 0 ?
+                                      <button
+                                        type="button"
+                                        disabled
+                                        class="btn btn-fill btn-sm"
+                                        style={{ backgroundColor: "green", color: "white", padding: "6px 13px", textAlign: "center", borderRadius: "8px", fontSize: "13px" }}
+                                      >
+                                        Approved
+                                      </button>
+                                      :
+                                      <div>
+                                        <button
+                                          type="button"
+                                          class="btn btn-fill btn-sm"
+                                          style={{ backgroundColor: "green", color: "white", padding: "6px 13px", textAlign: "center", borderRadius: "8px", fontSize: "13px" }}
+                                        >
+                                          Approve
+                                        </button>
+                                        <button
+                                          type="button"
+                                          class="btn btn-fill btn-sm"
+                                          style={{ backgroundColor: "red", color: "white", padding: "6px 13px", textAlign: "center", borderRadius: "8px", fontSize: "13px" }}
+                                        >
+                                          Cancel  
+                                        </button>
+                                      </div>
+                                  }
                                 </td>
                               </tr>
                             );

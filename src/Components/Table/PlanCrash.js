@@ -4,39 +4,52 @@ import React, { Fragment, useEffect, useState } from "react";
 //router
 import { Link } from "react-router-dom";
 
+//category dialog
+import AgencyDialog from "../Dialog/agencyDialog";
+
 //dayjs
 import dayjs from "dayjs";
 
 //alert
-import { permissionError } from "../../util/alert";
+import { warning, alert, permissionError } from "../../util/alert";
 
 //redux
-import { connect, useDispatch, useSelector } from "react-redux";
+import { useDispatch, connect, useSelector } from "react-redux";
+import { getAgency, enableDisableAgency } from "../../store/agency/action";
 import {
-  getAcceptedRedeem,
-  acceptRedeemRequest,
-} from "../../store/redeem/action";
-import FemaleImage from '../../assets/images/users/female.png'
+  OPEN_AGENCY_DIALOG,
+  UNSET_CREATE_AGENCY_DONE,
+  UNSET_UPDATE_AGENCY_DONE,
+} from "../../store/agency/types";
+
+//datatable
 import $ from "jquery";
 
 //custom css
 import "../../dist/css/style.min.css";
 import "../../dist/css/style.css";
-
+import FemaleImage from '../../assets/images/users/female.png'
 //MUI
-import { TablePagination } from "@material-ui/core";
-
+import { Snackbar, TablePagination } from "@material-ui/core";
+import { Alert } from "@material-ui/lab";
 import TablePaginationActions from "./TablePagination";
 
-const RedeemTable = (props) => {
-  const dispatch = useDispatch();
+//server path
+import { baseURL } from "../../util/serverPath";
 
+const PlanCrash = (props) => {
+  const dispatch = useDispatch();
   const [data, setData] = useState([]);
 
+  const [openSuccess, setOpenSuccess] = useState(false);
+  const [openUpdateSuccess, setOpenUpdateSuccess] = useState(false);
+  const [openDeleteCount, setOpenDeleteCount] = useState(false);
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
 
-  const redeem = useSelector((state) => state.redeem.acceptedRedeem);
+  const { agency, createDone, updateDone } = useSelector(
+    (state) => state.agency
+  );
 
   const hasPermission = useSelector((state) => state.admin.user.flag);
 
@@ -52,32 +65,63 @@ const RedeemTable = (props) => {
     setPage(0);
   };
 
+  useEffect(() => {
+    if (createDone) {
+      setOpenSuccess(true);
+      dispatch({ type: UNSET_CREATE_AGENCY_DONE });
+    }
+  }, [createDone, dispatch]);
+  useEffect(() => {
+    if (updateDone) {
+      setOpenUpdateSuccess(true);
+      dispatch({ type: UNSET_UPDATE_AGENCY_DONE });
+    }
+  }, [updateDone, dispatch]);
 
-
-  const id = props.match.params.id;
 
   useEffect(() => {
-    dispatch(getAcceptedRedeem(id));
+    dispatch(getAgency());
   }, [dispatch]);
 
   useEffect(() => {
-    setData(redeem);
-  }, [redeem]);
+    setData(agency);
+  }, [agency]);
+
+  // $(document).ready(function () {
+  //   $("#zero_config").DataTable();
+  //   $(".dataTables_empty").empty();
+  // });
+
+
+  const handleOpen = () => {
+    // if (!hasPermission) return permissionError();
+    dispatch({ type: OPEN_AGENCY_DIALOG });
+  };
+
+  const handleEdit = (data) => {
+    // if (!hasPermission) return permissionError();
+    dispatch({ type: OPEN_AGENCY_DIALOG, payload: data });
+  };
+
+  const handleCloseSuccess = () => {
+    setOpenSuccess(false);
+  };
+  const handleCloseUpdateSuccess = () => {
+    setOpenUpdateSuccess(false);
+  };
 
   const handleSearch = (e) => {
     const value = e.target.value.toUpperCase();
     if (value) {
-      const data = redeem.filter((data) => {
+      const data = agency.filter((data) => {
         return (
-          data?.host_id.name?.toUpperCase()?.indexOf(value) > -1 ||
-          data?.paymentGateway?.toUpperCase()?.indexOf(value) > -1 ||
-          data?.host_id.username?.toUpperCase()?.indexOf(value) > -1 ||
-          data?.description?.toUpperCase()?.indexOf(value) > -1
+          data?.name?.toUpperCase()?.indexOf(value) > -1 ||
+          data?.email?.toUpperCase()?.indexOf(value) > -1
         );
       });
       setData(data);
     } else {
-      return setData(redeem);
+      return setData(agency);
     }
   };
   $(document).ready(function () {
@@ -87,12 +131,38 @@ const RedeemTable = (props) => {
     });
   });
 
-  const { setting } = useSelector(
-    (state) => state.setting
-  );
+  const handleDisable = (data) => {
+    if (!hasPermission) return permissionError();
+    props.enableDisableAgency(data._id);
+  };
 
   return (
     <>
+      <Snackbar
+        open={openSuccess}
+        autoHideDuration={3000}
+        onClose={handleCloseSuccess}
+        anchorOrigin={{ vertical: "top", horizontal: "right" }}
+      >
+        <Alert onClose={handleCloseSuccess} severity="success">
+          <span style={{ color: "#184d47" }}>
+            <b>Success!</b> Agency add successfully.
+          </span>
+        </Alert>
+      </Snackbar>
+      <Snackbar
+        open={openUpdateSuccess}
+        autoHideDuration={3000}
+        onClose={handleCloseUpdateSuccess}
+        anchorOrigin={{ vertical: "top", horizontal: "right" }}
+      >
+        <Alert onClose={handleCloseUpdateSuccess} severity="success">
+          <span style={{ color: "#184d47" }}>
+            <b>Success!</b> Agency update successfully.
+          </span>
+        </Alert>
+      </Snackbar>
+
       <div class="container-fluid">
         <div class="row">
           <div class="col-12">
@@ -100,8 +170,18 @@ const RedeemTable = (props) => {
               <div class="card-body">
                 <div class="row">
                   <div class="col-xs-12 col-sm-12 col-md-6 col-lg-8 mt-4 float-left">
-                    <h3 class="card-title">Recharge History</h3>
+                    <button
+                      type="button"
+                      class="btn waves-effect waves-light btn-primary btn-sm"
+                      data-toggle="modal"
+                      // data-target="#country-modal"
+                      style={{ borderRadius: 5 }}
+                      onClick={handleOpen}
+                    >
+                      <i class="fas fa-plus"></i> New
+                    </button>
                   </div>
+
                   <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 mt-3 float-right">
                     <form action="">
                       <div class="input-group mb-4 border rounded-pill p-1">
@@ -127,7 +207,6 @@ const RedeemTable = (props) => {
                 <div class="row">
                   <div class="col-xs-12 col-sm-12 col-md-6 col-lg-8 mt-3 float-left mb-0"></div>
                 </div>
-
                 <div class="table-responsive">
                   <table
                     id="zero_config"
@@ -136,12 +215,9 @@ const RedeemTable = (props) => {
                     <thead>
                       <tr>
                         <th>No.</th>
-                        <th>User Id</th>
-                        <th>User Name</th>
-                        <th>Transaction Id</th>
-                        <th>Amount</th>
-                        <th>Status</th>
-                        <th>Create At</th>
+                        <th>Title</th>
+                        <th>Value</th>
+                        <th>Created At</th>
                         <th>Action</th>
                       </tr>
                     </thead>
@@ -161,25 +237,23 @@ const RedeemTable = (props) => {
                                   {(page * rowsPerPage) + (index + 1)}
                                 </td>
                                 <td style={{ verticalAlign: "middle" }}>
-                                  {data.userId}
-                                </td>
-                                <td style={{ verticalAlign: "middle" }}>
                                   {data.name}
                                 </td>
                                 <td style={{ verticalAlign: "middle" }}>
-                                  {data.transactionId}
+                                  {data.code}
+                                </td>
+
+                                <td style={{ verticalAlign: "middle" }}>
+                                  {dayjs(data.createdAt).format("DD MMM, YYYY")}
                                 </td>
                                 <td style={{ verticalAlign: "middle" }}>
-                                  {data.amount}
-                                </td>
-                                <td style={{ verticalAlign: "middle" }}>
-                                  {data.status}
-                                </td>
-                                <td style={{ verticalAlign: "middle" }}>
-                                  {dayjs(data.createAt).format("DD MMM, YYYY")}
-                                </td>
-                                <td style={{ verticalAlign: "middle" }}>
-                                  {dayjs(data.createAt).format("DD MMM, YYYY")}
+                                  <a
+                                    class="ml-3"
+                                    onClick={() => handleEdit(data)}
+                                    style={{ cursor: "pointer" }}
+                                  >
+                                    <i class="fas fa-edit text-primary mr-3"></i>
+                                  </a>
                                 </td>
                               </tr>
                             );
@@ -187,22 +261,12 @@ const RedeemTable = (props) => {
                         </Fragment>
                       ) : (
                         <tr>
-                          <td colSpan="8" align="center">
+                          <td colSpan="7" align="center">
                             Nothing to show!!
                           </td>
                         </tr>
                       )}
                     </tbody>
-                    <tfoot>
-                      <tr>
-                        <th>Image</th>
-                        <th>User Name</th>
-                        <th>Payment Gateway</th>
-                        <th>Coin</th> <th>Rupee</th>
-                        <th>Description</th>
-                        <th>Accepted On</th>
-                      </tr>
-                    </tfoot>
                   </table>
                 </div>
                 <div class="py-2">
@@ -232,12 +296,22 @@ const RedeemTable = (props) => {
             </div>
           </div>
         </div>
+        <div className="rule">
+          <h5>Rules</h5>
+<h6><span>Rule 1:</span>Set Value 10 Means 1.0 to 1.9</h6>
+<h6><span>Rule 2:</span>Set Value 20 Means 2.0 to 2.9</h6>
+<h6><span>Rule 3:</span>Set Value 30 Means 3.0 to 3.9</h6>
+<h6><span>Rule 4:</span>Set Value 10 Means 4.0 to 4.9</h6>
+<h6><span>Rule 5:</span>Set Value 100 Means Random result</h6>
+
+        </div>
       </div>
+      <AgencyDialog />
     </>
   );
 };
 
 export default connect(null, {
-  getAcceptedRedeem,
-  acceptRedeemRequest,
-})(RedeemTable);
+  getAgency,
+  enableDisableAgency,
+})(PlanCrash);
